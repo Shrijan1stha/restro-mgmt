@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %} WaiterList {% endblock %}
+
+{% block content %}
+<h1>Waiter list</h1>
+<div class="container-fluid">
+    <div class="btn-right">
+        <a href="{% url 'create_waiter' %}" class="btn btn-success">Add Waiter</a>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>S.N</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Address</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for waiter in waiters %}
+                <tr>
+                    <th scope="col">{{ forloop.counter }}</th>
+                    <th scope="col">
+                        {% if not waiter.middle_name %}
+                        {{ waiter.first_name }} {{ waiter.last_name }}
+                        {% else %}
+                        {{ waiter.first_name }} {{ waiter.middle_name }} {{ waiter.last_name }}
+                        {% endif %}
+                    </th>
+                    <th scope="col">{{ waiter.gender}}</th>
+                    <th scope="col">{{ waiter.address}}</th>
+                    <th scope="col">
+                        <a href="{% url 'edit_waiter' pk=waiter.id %}" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        <a href="{% url 'delete_waiter' pk=waiter.id %}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    </th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %} Table {% endblock %}
+
+{% block content %}
+<h1>Table</h1>
+<div class="container-fluid">
+    <div class="btn-right">
+        <a href="{% url 'create_table' %}" class="btn btn-success">Add table</a>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">S.N</th>
+                <th scope="col">Table No</th>
+                <th scope="col">Capacity</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for table in table %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <th>{{ table.table }}</th>
+                    <th>{{ table.capacity }}</th>
+                    <th>{{ table.status }}</th>
+                    <th>
+                        <a href="{% url 'edit_table' pk=table.id %}" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        <a href="{% url 'delete_table' pk=table.id %}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    </th>
+                </tr>
+            {% endfor %}
+            
+        </tbody>
+</table>
+</div>
+{% endblock %}

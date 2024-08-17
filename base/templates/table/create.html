@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} CreateTable {% endblock %}
+
+{% block content %}
+<h1>Create Table</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="table_no" class="form-label">Table No.</label>
+        <input type="number" class="form-control" name="table_no" id="table_no">
+    </div>
+    <div class="mb-3">
+        <label for="capacity" class="form-label">Capacity</label>
+          <input class="form-control" name="capacity" id="capacity">
+    </div>
+    <div class="mb-3">
+        <label for="status" class="form-label">Status</label>
+        <select class="form-select" name="status" id="status" aria-label="Default select example">
+            <option value="Avaiable">Avaiable</option>
+            <option value="Reserved">Reserved</option>
+            <option value="Occupied">Occupied</option>
+          </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{% endblock %}

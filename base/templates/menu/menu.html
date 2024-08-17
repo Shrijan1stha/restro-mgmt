@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %} Menu {% endblock %}
+
+{% block content %}
+<h1>Menu</h1>
+<div class="container-fluid">
+    <div class="btn-right">
+        <a href="{% url 'create_menu' %}" class="btn btn-success">Add Menu</a>
+    </div>
+    <p>Here are the available options:</p>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>S.N</th>
+                <th>Category</th>
+                <th>Items</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for menu in menu_list %}
+            <tr>
+                <th scope="col">{{ forloop.counter }}</th>
+                <th scope="col">{{ menu.category }}</th>
+                <th scope="col">{{ menu.items }}</th>
+                <th scope="col">Rs. {{ menu.price }}</th>
+                <th>
+                    <a href="{% url 'edit_menu' pk=menu.id %}" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <a href="{% url 'delete_menu' pk=menu.id %}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

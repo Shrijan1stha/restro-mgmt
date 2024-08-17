@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %} Edit Order {% endblock %}
+
+{% block content %}
+<h1>Edit Order</h1>
+
+<form method="post">
+    {% csrf_token %}
+    
+    <div class="mb-3 row">
+        <label for="table_no" class="col-sm-2 col-form-label">Table number</label>
+        <div class="col-sm-10">
+            <select class="form-select" name="table_no" id="table_no" aria-label="Default select example">
+                {% for tab in tables %}
+                    <option value="{{ tab.table }}" {% if tab.table == edit_order.table_no.table %}selected{% endif %}>
+                        {{ tab.table }} 
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="item_name" class="col-sm-2 col-form-label">Items</label>
+        <div class="col-sm-10">
+            <select class="form-select" name="item_name" id="item_name" aria-label="Default select example">
+                {% for menu in items %}
+                    <option value="{{ menu.items }}" {% if item.id == edit_order.items.items %}selected{% endif %}>
+                        <!--edit_order.items.items vaneko edit_order ko model ko items field kun field sanga foreginkey le connect xa-->
+                        {{ menu.items }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="quantity" class="col-sm-2 col-form-label">Quantity</label>
+        <div class="col-sm-10">
+            <input class="form-control" name="quantity" id="quantity" value="{{ edit_order.quantity }}">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{% endblock %}

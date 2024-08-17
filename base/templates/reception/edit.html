@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %} EditReceiption {% endblock %}
+
+{% block content %}
+<h1>Create Receiption</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3 row">
+        <label for="first_name" class="col-sm-2 col-form-label">First Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="first_name" id="first_name" value="{{ edit.first_name }}">
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="middle_name" class="col-sm-2 col-form-label">Middle Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="middle_name" id="middle_name" value="{{ edit.middle_name }}">
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="last_name" class="col-sm-2 col-form-label">Last Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="last_name" id="last_name" value="{{ edit.last_name }}">
+        </div>
+    </div>
+    
+    <div class="mb-3 row">
+        <label for="gender" class="col-sm-2 col-form-label">Gender`</label>
+        <div class="col-sm-10">
+            <select class="form-select" name="gender" id="gender" aria-label="Default select example">
+                {% if edit.gender == 'Male' %}
+                <option value="Male" selected>Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+                {% elif edit.gender == 'Female' %}
+                <option value="Male">Male</option>
+                <option value="Female" selected>Female</option>
+                <option value="Other">Other</option>
+                {% elif edit.gender == 'Other' %}
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other" selected>Other</option>
+                {% endif %}
+            </select>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="address" class="col-sm-2 col-form-label">Address</label>
+        <div class="col-sm-10">
+            <input class="form-control" name="address" id="address" value="{{ edit.address }}">
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="phone" class="col-sm-2 col-form-label">Phone Number</label>
+        <div class="col-sm-10">
+            <input class="form-control" name="phone" id="phone" value="{{ edit.phone }}">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{% endblock %}

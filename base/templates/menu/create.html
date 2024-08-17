@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %} CreateMenu {% endblock %}
+
+{% block content %}
+<h1>Create Menu</h1>
+{% if error %}
+    <div class="error">{{ error }}</div>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="item_name" class="form-label">Item Name</label>
+        <input type="text" id="item_name" name="item_name" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input type="number" id="price" name="price" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="category" class="form-label">Category</label>
+        <select class="form-select" name="category" id="category" aria-label="Default select example">
+            {% for category in cat_list %}
+            <option value="{{ category.id }}">{{ category.category }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">submit</button>
+</form>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %} CreateOrder {% endblock %}
+
+{% block content %}
+<h1>Create Order</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3 row">
+        <label for="table_no" class="col-sm-2 col-form-label">Table number</label>
+        <div class="col-sm-10">
+            <select class="form-select" name="table_no" id="table_no" aria-label="Default select example">
+                {% for table_no in tables %}
+                <option value="{{ table_no.id }}">{{ table_no.table }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    
+    <div class="mb-3 row">
+        <label for="items" class="col-sm-2 col-form-label">Items</label>
+        <div class="col-sm-10">
+            <select class="form-select" name="items" id="items" aria-label="Default select example">
+                {% for item in items %}
+                <option value="{{ item.id }}">{{ item.items }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label for="quantity" class="col-sm-2 col-form-label">Quantity</label>
+        <div class="col-sm-10">
+            <input type="number" name="quantity" id="quantity" class="form-select">
+        </div>
+    </div>
+    
+    </div>
+    <button type="submit" class="btn btn-primary">submit</button>
+</form>
+
+
+{% endblock %}

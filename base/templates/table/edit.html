@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %} EditTable {% endblock %}
+
+{% block content %}
+<h1>Edit Table</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="table_no" class="form-label">Table No.</label>
+        <input type="number" class="form-control" name="table_no" id="table_no" value="{{edit.table}}">
+    </div>
+    <div class="mb-3">
+        <label for="capacity" class="form-label">Capacity</label>
+          <input class="form-control" name="capacity" id="capacity" value="{{edit.capacity}}">
+    </div>
+    <div class="mb-3">
+        <label for="status" class="form-label">Status</label>
+        <select class="form-select" name="status" id="status" aria-label="Default select example">
+            {% if edit.status == 'Avaiable' %}
+                <option value="Avaiable" selected>Avaiable</option>
+                <option value="Reserved">Reserved</option>
+                <option value="Occupied">Occupied</option>
+            {% elif edit.status == 'Reserved' %}
+                <option value="Avaiable">Avaiable</option>
+                <option value="Reserved" selected>Reserved</option>
+                <option value="Occupied">Occupied</option>
+            {% elif edit.status == 'Occupied' %}
+                <option value="Avaiable">Avaiable</option>
+                <option value="Reserved">Reserved</option>
+                <option value="Occupied" selected>Occupied</option>
+            {% endif %}
+          </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

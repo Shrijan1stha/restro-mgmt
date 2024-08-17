@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %} Reception {% endblock %}
+
+{% block content %}
+<h1>Reception list</h1>
+<div class="container-fluid">
+    <div class="btn-right">
+        <a href="{% url 'create_reception' %}" class="btn btn-success">Add Reception</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>S.N</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Address</th>
+                <th>Phone number</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reception in receptions %}
+            <tr>
+                <th scope="col">{{ forloop.counter }}</th>
+                <th scope="col">
+                    {% if not reception.middle_name %}
+                    {{ reception.first_name }} {{ reception.last_name }}
+                    {% else %}
+                    {{ reception.first_name }} {{ reception.middle_name }} {{ reception.last_name }}
+                    {% endif %}
+                </th>
+                <th scope="col">{{ reception.gender }}</th>
+                <th scope="col">{{ reception.address }}</th>
+                <th scope="col">{{ reception.phone }}</th>
+                <th scope="col">
+                    <a href="{% url 'edit_reception' pk=reception.id %}" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <a href="{% url 'delete_reception' pk=reception.id %}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
